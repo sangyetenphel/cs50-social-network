@@ -1,0 +1,34 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h2>All Posts</h2>
+    {% if user.is_authenticated %}
+        <div class="border">
+            <h3>New Post</h3>
+            <form action="{% url 'index' %}" method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <button class="btn btn-primary">Post</button>
+            </form>
+        </div>
+    {% endif %}
+    
+    <div id="posts">
+        {% for post in posts %}
+        <div class="border">
+            <h5>{{ post.user }}</h5>
+            {% if post.user == request.user %}
+                <a href="{% url 'edit' post.id %}">Edit</a>
+            {% endif %}
+            <h6>{{ post.post }}</h6>
+            <p>{{ post.date_added }}</p>
+            {% if request.user in post.liked_users.all %}
+                <i class="fa fa-heart like red" data-id="{{ post.id }}"></i>
+            {% else %}
+                <i class="fa fa-heart like" data-id="{{ post.id }}"></i>
+            {% endif %}
+            <span id="post{{ post.id }}">{{ post.liked_users.count }}</span>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

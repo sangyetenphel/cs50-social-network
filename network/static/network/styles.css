@@ -1,0 +1,13 @@
+.border {
+    border: 2px solid black;
+    padding: 20px;
+    margin: 10px;
+}
+
+.follow-btn {
+    float: right;
+}
+
+.red {
+    color: red;
+}

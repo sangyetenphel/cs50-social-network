@@ -1,0 +1,11 @@
+{% extends 'network/layout.html' %}
+
+{% block body %}
+    {% for post in posts %}
+    <div class="border">
+        <h5>{{ post.user }}</h5>
+        <h6>{{ post.post }}</h6>
+        <p>{{ post.date_added }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}

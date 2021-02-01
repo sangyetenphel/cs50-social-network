@@ -1,0 +1,23 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    Followers: {{ follower }}
+    Following: {{ following }}
+
+    <h5>Posts</h5>
+    {% for post in posts %}
+        <div class="border">
+            {% if post.user != request.user %}
+                {% if post.user in follower_list %}
+                    <button data-follow="unfollow" data-user_id='{{ post.user.id }}' class="btn btn-primary follow-btn">Unfollow</button>   
+                {% else %}
+                    <button data-follow="follow" data-user_id='{{ post.user.id }}' class="btn btn-primary follow-btn">Follow</button>
+                {% endif %}
+            {% endif %}
+            <h5>{{ post.user }}</h5>
+            <h6>{{ post.post }}</h6>
+            <p>{{ post.date_added }}</p>
+        </div>
+    {% endfor %}
+
+{% endblock %}
